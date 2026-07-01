@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+<rect width="400" height="300" fill="#0F1720"/>
+<rect x="60" y="70" width="280" height="170" rx="8" fill="#101820" stroke="#4FD1C5" stroke-width="2"/>
+<rect x="60" y="70" width="280" height="26" rx="8" fill="#182028"/>
+<circle cx="76" cy="83" r="4" fill="#E6553D"/><circle cx="90" cy="83" r="4" fill="#F2A93B"/><circle cx="104" cy="83" r="4" fill="#4FD1C5"/>
+<g fill="none" stroke="#F2A93B" stroke-width="2.5">
+<path d="M85,150 L65,170 L85,190"/><path d="M155,150 L175,170 L155,190"/>
+</g>
+<line x1="115" y1="195" x2="130" y2="145" stroke="#E8EEF2" stroke-width="2.5"/>
+<text x="200" y="270" text-anchor="middle" fill="#7C8B95" font-family="monospace" font-size="13">WEB DEV // add your image</text>
+</svg>

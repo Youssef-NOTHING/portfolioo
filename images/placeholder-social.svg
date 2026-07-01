@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+<rect width="400" height="300" fill="#0F1720"/>
+<rect x="130" y="60" width="140" height="180" rx="16" fill="#101820" stroke="#4FD1C5" stroke-width="2"/>
+<rect x="150" y="85" width="100" height="100" rx="6" fill="#182028" stroke="#F2A93B" stroke-width="1.5"/>
+<circle cx="175" cy="200" r="5" fill="#F2A93B"/><circle cx="200" cy="200" r="5" fill="#4FD1C5"/><circle cx="225" cy="200" r="5" fill="#E6553D"/>
+<text x="200" y="270" text-anchor="middle" fill="#7C8B95" font-family="monospace" font-size="13">SOCIAL POSTS // add your image</text>
+</svg>
