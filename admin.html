@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Youssef Portfolio</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-shell">
+
+  <!-- Lock screen -->
+  <div class="lock-screen" id="lock-screen">
+    <div class="lock-card">
+      <div class="terminal-title">youssef@portfolio:~/admin$</div>
+      <h2 id="lock-title">Set an admin password</h2>
+      <p class="hint" id="lock-hint">
+        This is the only thing standing between anyone and your gallery — pick something you'll remember.
+        It's stored only in this browser, so it's private on this device but not a substitute for keeping this page's URL to yourself.
+      </p>
+      <div class="field">
+        <label for="pw-input">Password</label>
+        <input type="password" id="pw-input" autocomplete="off">
+      </div>
+      <div class="field" id="pw-confirm-field" style="display:none;">
+        <label for="pw-confirm">Confirm password</label>
+        <input type="password" id="pw-confirm" autocomplete="off">
+      </div>
+      <p class="lock-error" id="lock-error"></p>
+      <button class="btn solid" id="lock-submit" style="width:100%;">Set password</button>
+    </div>
+  </div>
+
+  <!-- Dashboard (hidden until unlocked) -->
+  <div id="dashboard" style="display:none;">
+    <div class="admin-bar">
+      <div class="admin-bar-left"><span class="led"></span> admin console — private</div>
+      <div class="admin-actions">
+        <button class="btn ghost small" id="change-pw-btn">Change password</button>
+        <a class="btn ghost small" href="index.html">View site</a>
+        <button class="btn small" id="lock-btn">Lock</button>
+      </div>
+    </div>
+
+    <div class="admin-main">
+      <div class="wrap">
+
+        <div class="upload-panel">
+          <h3>&gt; add.item</h3>
+          <div class="form-grid">
+            <div class="full">
+              <label style="display:block;font-family:var(--font-mono);font-size:11.5px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;">Image</label>
+              <div class="drop-zone" id="drop-zone">
+                <img id="drop-preview" class="drop-preview" style="display:none;">
+                <div id="drop-text">Click to choose a file, or drag an image here</div>
+                <input type="file" id="file-input" accept="image/*" style="display:none;">
+              </div>
+            </div>
+            <div class="field">
+              <label for="item-title">Title</label>
+              <input type="text" id="item-title" placeholder="e.g. Reel edit — cover frame">
+            </div>
+            <div class="field">
+              <label for="item-category">Category</label>
+              <select id="item-category"></select>
+            </div>
+            <div class="field full">
+              <label for="item-desc">Description (optional)</label>
+              <textarea id="item-desc" placeholder="A line or two about this piece"></textarea>
+            </div>
+          </div>
+          <div style="margin-top:16px;display:flex;gap:10px;">
+            <button class="btn solid" id="add-btn">Add to gallery</button>
+            <button class="btn ghost" id="reset-form-btn">Clear</button>
+          </div>
+        </div>
+
+        <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--muted);margin-bottom:14px;">&gt; gallery.items <span id="item-count" style="color:var(--teal);"></span></h3>
+        <div class="admin-list" id="admin-list"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
