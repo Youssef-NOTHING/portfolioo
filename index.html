@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youssef | Cybersecurity Engineer & Web Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            dark: '#0a0e27',
+                            darker: '#050817',
+                            primary: '#00f0ff',
+                            secondary: '#7000ff',
+                            accent: '#ff006e',
+                            surface: '#111936'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #00f0ff, 0 0 10px #00f0ff' },
+                            '100%': { boxShadow: '0 0 20px #00f0ff, 0 0 40px #00f0ff' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050817;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .font-cyber {
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .glass {
+            background: rgba(17, 25, 54, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        .glass:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .skill-bar {
+            background: linear-gradient(90deg, #00f0ff 0%, #7000ff 100%);
+        }
+        
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.3);
+        }
+        
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #00f0ff;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: #00f0ff;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .section-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Form states */
+        .form-success {
+            display: none;
+        }
+        .form-success.active {
+            display: flex;
+        }
+        .form-loading {
+            display: none;
+        }
+        .form-loading.active {
+            display: flex;
+        }
+        .form-error {
+            display: none;
+        }
+        .form-error.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Animated Background -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass border-b border-cyber-primary/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <span class="font-cyber text-2xl font-bold text-cyber-primary text-glow">&lt;Youssef/&gt;</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-gray-300 hover:text-cyber-primary px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="#about" class="nav-link text-gray-300 hover:text-cyber-primary px-3 py-2 text-sm font-medium transition-colors">About</a>
+                        <a href="#skills" class="nav-link text-gray-300 hover:text-cyber-primary px-3 py-2 text-sm font-medium transition-colors">Skills</a>
+                        <a href="#projects" class="nav-link text-gray-300 hover:text-cyber-primary px-3 py-2 text-sm font-medium transition-colors">Projects</a>
+                        <a href="#contact" class="nav-link text-gray-300 hover:text-cyber-primary px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-cyber-primary">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-cyber-primary/10">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block text-gray-300 hover:text-cyber-primary px-3 py-2 text-base font-medium">Home</a>
+                <a href="#about" class="block text-gray-300 hover:text-cyber-primary px-3 py-2 text-base font-medium">About</a>
+                <a href="#skills" class="block text-gray-300 hover:text-cyber-primary px-3 py-2 text-base font-medium">Skills</a>
+                <a href="#projects" class="block text-gray-300 hover:text-cyber-primary px-3 py-2 text-base font-medium">Projects</a>
+                <a href="#contact" class="block text-gray-300 hover:text-cyber-primary px-3 py-2 text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative grid-bg pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="animate-float">
+                <div class="inline-block mb-6 px-4 py-2 rounded-full glass border border-cyber-primary/30">
+                    <span class="text-cyber-primary font-cyber text-sm tracking-wider">👋 Welcome to my digital space</span>
+                </div>
+            </div>
+            
+            <h1 class="font-cyber text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
+                <span class="text-white">I'm </span>
+                <span class="text-cyber-primary text-glow">Youssef</span>
+            </h1>
+            
+            <div class="h-16 md:h-20 flex items-center justify-center">
+                <p class="font-cyber text-xl md:text-3xl text-gray-400 typing-cursor" id="typing-text"></p>
+            </div>
+            
+            <p class="mt-6 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                20-year-old Engineering Student specializing in <span class="text-cyber-primary font-semibold">Cybersecurity</span> & 
+                <span class="text-cyber-secondary font-semibold">Web Development</span> at EIDIA, Euromed University of Fez
+            </p>
+            
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="group relative px-8 py-4 bg-cyber-primary text-cyber-darker font-bold rounded-lg overflow-hidden transition-all hover:scale-105">
+                    <span class="relative z-10">View My Work</span>
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                </a>
+                <a href="#contact" class="px-8 py-4 border-2 border-cyber-primary text-cyber-primary font-bold rounded-lg hover:bg-cyber-primary hover:text-cyber-darker transition-all hover:scale-105">
+                    Get In Touch
+                </a>
+            </div>
+
+            <!-- Social Links Hero -->
+            <div class="mt-12 flex justify-center gap-6">
+                <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" class="social-btn w-12 h-12 rounded-full glass flex items-center justify-center text-cyber-primary hover:bg-cyber-primary hover:text-cyber-darker">
+                    <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+                <a href="https://github.com/YOUR_GITHUB" target="_blank" class="social-btn w-12 h-12 rounded-full glass flex items-center justify-center text-cyber-primary hover:bg-cyber-primary hover:text-cyber-darker">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" class="social-btn w-12 h-12 rounded-full glass flex items-center justify-center text-cyber-accent hover:bg-cyber-accent hover:text-white">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="https://youtube.com/@YOUR_YOUTUBE" target="_blank" class="social-btn w-12 h-12 rounded-full glass flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-cyber-primary text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-fade">
+                <div class="text-center mb-16">
+                    <h2 class="font-cyber text-4xl md:text-5xl font-bold text-white mb-4">About <span class="text-cyber-primary">Me</span></h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyber-primary to-cyber-secondary mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-cyber-primary to-cyber-secondary rounded-2xl opacity-20 blur-xl"></div>
+                        <div class="relative glass rounded-2xl p-8 border border-cyber-primary/20">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-2xl font-bold text-cyber-darker">
+                                    Y
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-white">Youssef</h3>
+                                    <p class="text-cyber-primary">Cybersecurity Enthusiast</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3 text-gray-300">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-graduation-cap text-cyber-primary w-5"></i>
+                                    <span>EIDIA - Euromed University of Fez</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-shield-alt text-cyber-primary w-5"></i>
+                                    <span>Specialization: Cybersecurity</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-code text-cyber-primary w-5"></i>
+                                    <span>Web Developer & Designer</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-birthday-cake text-cyber-primary w-5"></i>
+                                    <span>20 Years Old</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-map-marker-alt text-cyber-primary w-5"></i>
+                                    <span>Fez, Morocco</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <h3 class="text-3xl font-bold text-white">Passionate about <span class="text-cyber-primary">Securing</span> & <span class="text-cyber-secondary">Building</span> the Digital World</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            I'm currently pursuing my engineering degree at EIDIA (École d'Ingénieur Digital et d'Intelligence Artificielle) at Euromed University of Fez, with a specialization in Cybersecurity. My journey combines the art of protecting digital assets with creating beautiful, functional web experiences.
+                        </p>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            When I'm not analyzing vulnerabilities or writing secure code, you'll find me designing modern web interfaces, creating content for my YouTube channel, or exploring the latest trends in AI and cybersecurity.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4 pt-4">
+                            <div class="glass rounded-xl p-4 text-center border border-cyber-primary/10">
+                                <div class="text-3xl font-bold text-cyber-primary font-cyber">2+</div>
+                                <div class="text-sm text-gray-400 mt-1">Years Experience</div>
+                            </div>
+                            <div class="glass rounded-xl p-4 text-center border border-cyber-secondary/10">
+                                <div class="text-3xl font-bold text-cyber-secondary font-cyber">10+</div>
+                                <div class="text-sm text-gray-400 mt-1">Projects Completed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative grid-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-fade">
+                <div class="text-center mb-16">
+                    <h2 class="font-cyber text-4xl md:text-5xl font-bold text-white mb-4">My <span class="text-cyber-primary">Skills</span></h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyber-primary to-cyber-secondary mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cybersecurity -->
+                    <div class="glass rounded-2xl p-6 border border-cyber-primary/20 hover:border-cyber-primary/50 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-cyber-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-shield-alt text-2xl text-cyber-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Cybersecurity</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">Network Security</span>
+                                    <span class="text-cyber-primary">85%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">Penetration Testing</span>
+                                    <span class="text-cyber-primary">75%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">Cryptography</span>
+                                    <span class="text-cyber-primary">70%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Web Development -->
+                    <div class="glass rounded-2xl p-6 border border-cyber-secondary/20 hover:border-cyber-secondary/50 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-cyber-secondary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-code text-2xl text-cyber-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Web Development</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">HTML/CSS/JavaScript</span>
+                                    <span class="text-cyber-secondary">95%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full rounded-full bg-gradient-to-r from-cyber-secondary to-cyber-accent" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">React / Next.js</span>
+                                    <span class="text-cyber-secondary">80%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full rounded-full bg-gradient-to-r from-cyber-secondary to-cyber-accent" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">Node.js / Backend</span>
+                                    <span class="text-cyber-secondary">75%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full rounded-full bg-gradient-to-r from-cyber-secondary to-cyber-accent" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Design -->
+                    <div class="glass rounded-2xl p-6 border border-cyber-accent/20 hover:border-cyber-accent/50 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-cyber-accent/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-paint-brush text-2xl text-cyber-accent"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">UI/UX Design</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">Figma</span>
+                                    <span class="text-cyber-accent">90%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full rounded-full bg-gradient-to-r from-cyber-accent to-orange-500" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">Adobe XD</span>
+                                    <span class="text-cyber-accent">75%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full rounded-full bg-gradient-to-r from-cyber-accent to-orange-500" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">Responsive Design</span>
+                                    <span class="text-cyber-accent">95%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full rounded-full bg-gradient-to-r from-cyber-accent to-orange-500" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Programming -->
+                    <div class="glass rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-terminal text-2xl text-green-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Programming</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm border border-green-500/20">Python</span>
+                            <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm border border-green-500/20">C/C++</span>
+                            <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm border border-green-500/20">JavaScript</span>
+                            <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm border border-green-500/20">Bash</span>
+                            <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm border border-green-500/20">SQL</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="glass rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-tools text-2xl text-purple-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Tools & Platforms</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-sm border border-purple-500/20">Git/GitHub</span>
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-sm border border-purple-500/20">Docker</span>
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-sm border border-purple-500/20">Linux</span>
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-sm border border-purple-500/20">Kali Linux</span>
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-sm border border-purple-500/20">Wireshark</span>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="glass rounded-2xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-yellow-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-brain text-2xl text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Soft Skills</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-sm border border-yellow-500/20">Problem Solving</span>
+                            <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-sm border border-yellow-500/20">Teamwork</span>
+                            <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-sm border border-yellow-500/20">Communication</span>
+                            <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-sm border border-yellow-500/20">Adaptability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-fade">
+                <div class="text-center mb-16">
+                    <h2 class="font-cyber text-4xl md:text-5xl font-bold text-white mb-4">Featured <span class="text-cyber-primary">Projects</span></h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyber-primary to-cyber-secondary mx-auto rounded-full"></div>
+                    <p class="mt-4 text-gray-400">Some of my recent work and creations</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="project-card glass rounded-2xl overflow-hidden border border-cyber-primary/20">
+                        <div class="h-48 bg-gradient-to-br from-cyber-primary/20 to-cyber-secondary/20 flex items-center justify-center relative overflow-hidden group">
+                            <i class="fas fa-shield-alt text-6xl text-cyber-primary/30 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute inset-0 bg-cyber-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex gap-2 mb-3">
+                                <span class="px-2 py-1 text-xs rounded bg-cyber-primary/10 text-cyber-primary border border-cyber-primary/20">Security</span>
+                                <span class="px-2 py-1 text-xs rounded bg-cyber-secondary/10 text-cyber-secondary border border-cyber-secondary/20">Python</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Network Vulnerability Scanner</h3>
+                            <p class="text-gray-400 text-sm mb-4">Automated security assessment tool that scans networks for vulnerabilities and generates detailed reports.</p>
+                            <div class="flex gap-3">
+                                <a href="#" class="text-cyber-primary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fab fa-github mr-1"></i> Code
+                                </a>
+                                <a href="#" class="text-cyber-secondary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card glass rounded-2xl overflow-hidden border border-cyber-secondary/20">
+                        <div class="h-48 bg-gradient-to-br from-cyber-secondary/20 to-cyber-accent/20 flex items-center justify-center relative overflow-hidden group">
+                            <i class="fas fa-shopping-cart text-6xl text-cyber-secondary/30 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute inset-0 bg-cyber-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex gap-2 mb-3">
+                                <span class="px-2 py-1 text-xs rounded bg-cyber-secondary/10 text-cyber-secondary border border-cyber-secondary/20">Web</span>
+                                <span class="px-2 py-1 text-xs rounded bg-green-500/10 text-green-400 border border-green-500/20">React</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">E-Commerce Platform</h3>
+                            <p class="text-gray-400 text-sm mb-4">Full-stack e-commerce website with secure payment integration, user authentication, and admin dashboard.</p>
+                            <div class="flex gap-3">
+                                <a href="#" class="text-cyber-primary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fab fa-github mr-1"></i> Code
+                                </a>
+                                <a href="#" class="text-cyber-secondary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card glass rounded-2xl overflow-hidden border border-cyber-accent/20">
+                        <div class="h-48 bg-gradient-to-br from-cyber-accent/20 to-orange-500/20 flex items-center justify-center relative overflow-hidden group">
+                            <i class="fas fa-lock text-6xl text-cyber-accent/30 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute inset-0 bg-cyber-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex gap-2 mb-3">
+                                <span class="px-2 py-1 text-xs rounded bg-cyber-accent/10 text-cyber-accent border border-cyber-accent/20">Crypto</span>
+                                <span class="px-2 py-1 text-xs rounded bg-cyber-primary/10 text-cyber-primary border border-cyber-primary/20">JavaScript</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Encryption Tool Suite</h3>
+                            <p class="text-gray-400 text-sm mb-4">Web-based encryption and decryption tool supporting AES, RSA, and custom cipher algorithms.</p>
+                            <div class="flex gap-3">
+                                <a href="#" class="text-cyber-primary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fab fa-github mr-1"></i> Code
+                                </a>
+                                <a href="#" class="text-cyber-secondary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card glass rounded-2xl overflow-hidden border border-green-500/20">
+                        <div class="h-48 bg-gradient-to-br from-green-500/20 to-cyber-primary/20 flex items-center justify-center relative overflow-hidden group">
+                            <i class="fas fa-chart-line text-6xl text-green-400/30 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex gap-2 mb-3">
+                                <span class="px-2 py-1 text-xs rounded bg-green-500/10 text-green-400 border border-green-500/20">Dashboard</span>
+                                <span class="px-2 py-1 text-xs rounded bg-cyber-secondary/10 text-cyber-secondary border border-cyber-secondary/20">Vue.js</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Security Analytics Dashboard</h3>
+                            <p class="text-gray-400 text-sm mb-4">Real-time security monitoring dashboard with threat visualization and automated alerting system.</p>
+                            <div class="flex gap-3">
+                                <a href="#" class="text-cyber-primary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fab fa-github mr-1"></i> Code
+                                </a>
+                                <a href="#" class="text-cyber-secondary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="project-card glass rounded-2xl overflow-hidden border border-purple-500/20">
+                        <div class="h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center relative overflow-hidden group">
+                            <i class="fas fa-mobile-alt text-6xl text-purple-400/30 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute inset-0 bg-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex gap-2 mb-3">
+                                <span class="px-2 py-1 text-xs rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">Mobile</span>
+                                <span class="px-2 py-1 text-xs rounded bg-cyber-primary/10 text-cyber-primary border border-cyber-primary/20">React Native</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Secure Chat Application</h3>
+                            <p class="text-gray-400 text-sm mb-4">End-to-end encrypted messaging app with biometric authentication and self-destructing messages.</p>
+                            <div class="flex gap-3">
+                                <a href="#" class="text-cyber-primary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fab fa-github mr-1"></i> Code
+                                </a>
+                                <a href="#" class="text-cyber-secondary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="project-card glass rounded-2xl overflow-hidden border border-yellow-500/20">
+                        <div class="h-48 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 flex items-center justify-center relative overflow-hidden group">
+                            <i class="fas fa-robot text-6xl text-yellow-400/30 group-hover:scale-110 transition-transform duration-500"></i>
+                            <div class="absolute inset-0 bg-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex gap-2 mb-3">
+                                <span class="px-2 py-1 text-xs rounded bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">AI/ML</span>
+                                <span class="px-2 py-1 text-xs rounded bg-green-500/10 text-green-400 border border-green-500/20">Python</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Threat Detection AI</h3>
+                            <p class="text-gray-400 text-sm mb-4">Machine learning model for detecting and classifying cyber threats using behavioral analysis.</p>
+                            <div class="flex gap-3">
+                                <a href="#" class="text-cyber-primary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fab fa-github mr-1"></i> Code
+                                </a>
+                                <a href="#" class="text-cyber-secondary hover:text-white transition-colors text-sm font-medium">
+                                    <i class="fas fa-external-link-alt mr-1"></i> Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative grid-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-fade">
+                <div class="text-center mb-16">
+                    <h2 class="font-cyber text-4xl md:text-5xl font-bold text-white mb-4">Get In <span class="text-cyber-primary">Touch</span></h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyber-primary to-cyber-secondary mx-auto rounded-full"></div>
+                    <p class="mt-4 text-gray-400">Let's collaborate on something amazing</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div class="space-y-8">
+                        <div class="glass rounded-2xl p-8 border border-cyber-primary/20">
+                            <h3 class="text-2xl font-bold text-white mb-6">Contact Information</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-cyber-primary/10 flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-envelope text-cyber-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Email</h4>
+                                        <p class="text-gray-400">youssef@example.com</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-cyber-secondary/10 flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt text-cyber-secondary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Location</h4>
+                                        <p class="text-gray-400">Fez, Morocco</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-cyber-accent/10 flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-university text-cyber-accent text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Education</h4>
+                                        <p class="text-gray-400">EIDIA, Euromed University of Fez</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 pt-8 border-t border-gray-700">
+                                <h4 class="text-white font-semibold mb-4">Follow Me</h4>
+                                <div class="flex gap-4">
+                                    <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" class="social-btn w-12 h-12 rounded-xl glass flex items-center justify-center text-[#0077b5] hover:bg-[#0077b5] hover:text-white border border-[#0077b5]/30">
+                                        <i class="fab fa-linkedin-in text-xl"></i>
+                                    </a>
+                                    <a href="https://github.com/YOUR_GITHUB" target="_blank" class="social-btn w-12 h-12 rounded-xl glass flex items-center justify-center text-white hover:bg-gray-800 border border-gray-600/30">
+                                        <i class="fab fa-github text-xl"></i>
+                                    </a>
+                                    <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" class="social-btn w-12 h-12 rounded-xl glass flex items-center justify-center text-[#E4405F] hover:bg-[#E4405F] hover:text-white border border-[#E4405F]/30">
+                                        <i class="fab fa-instagram text-xl"></i>
+                                    </a>
+                                    <a href="https://youtube.com/@YOUR_YOUTUBE" target="_blank" class="social-btn w-12 h-12 rounded-xl glass flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000] hover:text-white border border-[#FF0000]/30">
+                                        <i class="fab fa-youtube text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form with Formspree -->
+                    <div class="glass rounded-2xl p-8 border border-cyber-secondary/20">
+                        <h3 class="text-2xl font-bold text-white mb-6">Send Me a Message</h3>
+                        
+                        <!-- Success Message -->
+                        <div id="form-success" class="form-success flex-col items-center justify-center text-center py-8">
+                            <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-4">
+                                <i class="fas fa-check text-3xl text-green-400"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2">Message Sent!</h4>
+                            <p class="text-gray-400">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                            <button onclick="resetForm()" class="mt-6 px-6 py-2 border border-cyber-primary text-cyber-primary rounded-lg hover:bg-cyber-primary hover:text-cyber-darker transition-all">
+                                Send Another Message
+                            </button>
+                        </div>
+
+                        <!-- Error Message -->
+                        <div id="form-error" class="form-error flex-col items-center justify-center text-center py-8">
+                            <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mb-4">
+                                <i class="fas fa-exclamation-triangle text-3xl text-red-400"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2">Oops!</h4>
+                            <p class="text-gray-400">Something went wrong. Please try again later.</p>
+                            <button onclick="resetForm()" class="mt-6 px-6 py-2 border border-cyber-primary text-cyber-primary rounded-lg hover:bg-cyber-primary hover:text-cyber-darker transition-all">
+                                Try Again
+                            </button>
+                        </div>
+
+                        <!-- Loading State -->
+                        <div id="form-loading" class="form-loading flex-col items-center justify-center text-center py-12">
+                            <div class="w-12 h-12 border-4 border-cyber-primary/30 border-t-cyber-primary rounded-full animate-spin mb-4"></div>
+                            <p class="text-gray-400">Sending your message...</p>
+                        </div>
+
+                        <!-- The Form -->
+                        <form id="contact-form" action="https://formspree.io/f/xwvdwwly" method="POST" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Your Name</label>
+                                <input type="text" name="name" class="w-full px-4 py-3 rounded-xl bg-cyber-dark border border-gray-700 text-white focus:border-cyber-primary focus:outline-none focus:ring-1 focus:ring-cyber-primary transition-all" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Your Email</label>
+                                <input type="email" name="email" class="w-full px-4 py-3 rounded-xl bg-cyber-dark border border-gray-700 text-white focus:border-cyber-primary focus:outline-none focus:ring-1 focus:ring-cyber-primary transition-all" placeholder="john@example.com" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Subject</label>
+                                <input type="text" name="subject" class="w-full px-4 py-3 rounded-xl bg-cyber-dark border border-gray-700 text-white focus:border-cyber-primary focus:outline-none focus:ring-1 focus:ring-cyber-primary transition-all" placeholder="Project Collaboration" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                                <textarea name="message" rows="4" class="w-full px-4 py-3 rounded-xl bg-cyber-dark border border-gray-700 text-white focus:border-cyber-primary focus:outline-none focus:ring-1 focus:ring-cyber-primary transition-all resize-none" placeholder="Tell me about your project..." required></textarea>
+                            </div>
+                            <!-- Honeypot field to prevent spam -->
+                            <input type="text" name="_gotcha" style="display:none">
+                            <button type="submit" id="submit-btn" class="w-full py-4 bg-gradient-to-r from-cyber-primary to-cyber-secondary text-cyber-darker font-bold rounded-xl hover:opacity-90 transition-all hover:scale-[1.02] flex items-center justify-center gap-2">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="font-cyber text-xl font-bold text-cyber-primary">&lt;Youssef/&gt;</span>
+                    <span class="text-gray-500">| Cybersecurity & Web Development</span>
+                </div>
+                <div class="flex gap-6">
+                    <a href="hhttps://www.linkedin.com/in/youssef-boukhmiss-8285a6342/" target="_blank" class="text-gray-400 hover:text-cyber-primary transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://github.com/Youssef-NOTHING" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/nothinghoops/" target="_blank" class="text-gray-400 hover:text-cyber-accent transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@NOTHINGHOOPS" target="_blank" class="text-gray-400 hover:text-red-500 transition-colors">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm"> 2024 Youssef. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Particle Background Animation
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const particles = [];
+        const particleCount = 100;
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = Math.random() > 0.5 ? '#00f0ff' : '#7000ff';
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function init() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        init();
+        animate();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Typing Effect
+        const texts = [
+            "Cybersecurity Engineer",
+            "Web Developer",
+            "UI/UX Designer",
+            "Content Creator"
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typing-text');
+        
+        function type() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            let typeSpeed = isDeleting ? 50 : 100;
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typeSpeed = 500;
+            }
+            
+            setTimeout(type, typeSpeed);
+        }
+        
+        type();
+        
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section-fade').forEach((el) => observer.observe(el));
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Navbar Background on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-cyber-darker/90');
+            } else {
+                nav.classList.remove('bg-cyber-darker/90');
+            }
+        });
+
+        // ============================================
+        // FORMSPREE CONTACT FORM HANDLING
+        // ============================================
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+        const formError = document.getElementById('form-error');
+        const formLoading = document.getElementById('form-loading');
+        const submitBtn = document.getElementById('submit-btn');
+
+        function showForm() {
+            contactForm.style.display = 'block';
+            formSuccess.classList.remove('active');
+            formError.classList.remove('active');
+            formLoading.classList.remove('active');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        }
+
+        function showLoading() {
+            contactForm.style.display = 'none';
+            formSuccess.classList.remove('active');
+            formError.classList.remove('active');
+            formLoading.classList.add('active');
+        }
+
+        function showSuccess() {
+            contactForm.style.display = 'none';
+            formSuccess.classList.add('active');
+            formError.classList.remove('active');
+            formLoading.classList.remove('active');
+        }
+
+        function showError() {
+            contactForm.style.display = 'none';
+            formSuccess.classList.remove('active');
+            formError.classList.add('active');
+            formLoading.classList.remove('active');
+        }
+
+        function resetForm() {
+            contactForm.reset();
+            showForm();
+        }
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            showLoading();
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(contactForm);
+            
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    showSuccess();
+                } else {
+                    showError();
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                showError();
+            }
+        });
+    </script>
+</body>
+</html>
