@@ -1,2 +1,0 @@
-# portfolioo
-My principal portfolio
